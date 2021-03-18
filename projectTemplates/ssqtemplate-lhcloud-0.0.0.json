@@ -1,0 +1,1158 @@
+{
+  "title": "SSQ Template",
+  "version": "2.0.0",
+  "name": "ssqtemplate-lhcloud",
+  "roles": {
+    "administrator": {
+      "title": "Administrator",
+      "description": "A role for Administrative Users.",
+      "admin": true,
+      "default": false
+    },
+    "authenticated": {
+      "title": "Authenticated",
+      "description": "A role for Authenticated Users.",
+      "admin": false,
+      "default": false
+    },
+    "anonymous": {
+      "title": "Anonymous",
+      "description": "A role for Anonymous Users.",
+      "admin": false,
+      "default": true
+    },
+    "formSubmitter": {
+      "title": "Form Submitter",
+      "description": "Form submission role",
+      "admin": false,
+      "default": false
+    }
+  },
+  "forms": {
+    "samplePdfSettings": {
+      "title": "Sample PDF settings",
+      "type": "form",
+      "name": "samplePdfSettings",
+      "path": "samplepdfsettings",
+      "display": "form",
+      "tags": [],
+      "settings": {},
+      "components": [
+        {
+          "tableView": false,
+          "key": "fieldSet",
+          "type": "fieldset",
+          "label": "Field Set",
+          "input": false,
+          "components": [
+            {
+              "label": "Watermark",
+              "tag": "div",
+              "attrs": [
+                {
+                  "attr": "style",
+                  "value": "position: fixed;bottom:0px;right:0px;opacity: 0.6;font-size: 30em;width: 100%;text-align: center;color: black;z-index: -1;"
+                }
+              ],
+              "content": "<!--\n<div style=\"width: 100%;position: absolute;z-index: 2;margin-top:-2000px;text-align:center\">{{ moment().format(\"DD\")}}</div>\n\n<div style=\"width: 100%;text-align:center\"> {{ moment().format(\"MMM\").toUpperCase()}}</div>\n-->\n<div style=\"position: absolute;z-index:2;margin-top:-400px;margin-left:200px;text-align:center\">{{ moment().add(7,'days').format(\"DD\")}}</div>\n<div style=\"text-align:center;\">{{ moment().add(7,'days').format(\"MMM\").toUpperCase()}}</div>\n<!-- {{ moment().format(\"MMM\")}}-->",
+              "refreshOnChange": false,
+              "tableView": false,
+              "key": "html",
+              "type": "htmlelement",
+              "input": false
+            },
+            {
+              "label": "transport",
+              "attrs": [
+                {
+                  "attr": "",
+                  "value": ""
+                }
+              ],
+              "content": "<div style=\"padding-top: 0px; position: relative\"><img style=\"display: block;\" src=\"https://www.qld.gov.au/__data/assets/image/0021/135435/declaration-pass-F-700.png\" width=\"100%\" height=\"100%\" alt=\"\" /></div>",
+              "refreshOnChange": false,
+              "tableView": false,
+              "key": "transport",
+              "type": "htmlelement",
+              "input": false
+            },
+            {
+              "label": "Communications",
+              "attrs": [
+                {
+                  "attr": "style",
+                  "value": "position:absolute; z-index:1;"
+                }
+              ],
+              "content": "<h1><strong>Pass expires on: {{ moment().add(7,'days').format(\"DD/MM/YYYY\")}}</strong></h1>\n<br />\n<p>\nPlease note: This pass is only valid for a 7-day period from the date of issue or until your circumstances change, whichever is shorter. This pass is void and a new pass required if the Queensland Border Restriction Direction is updated within the 7-day period. Please check the current information at www.qld.gov.au/border-pass before travelling.\n</p>",
+              "refreshOnChange": false,
+              "tableView": false,
+              "key": "communications1",
+              "type": "htmlelement",
+              "input": false
+            },
+            {
+              "label": "HTML",
+              "attrs": [
+                {
+                  "attr": "style",
+                  "value": "position:absolute; z-index:1;"
+                }
+              ],
+              "content": "<h3 style=\"display: inline;\"><strong>Reference ID:</strong></h3>\n<span style=\"font-size:1.5em\">\n &nbsp;{{data.cet}}\n</span>",
+              "refreshOnChange": true,
+              "tableView": false,
+              "key": "applicantId",
+              "type": "htmlelement",
+              "input": false,
+              "hideOnChildrenHidden": false
+            },
+            {
+              "label": "HTML",
+              "attrs": [
+                {
+                  "attr": "style",
+                  "value": "position:absolute; z-index:1;"
+                }
+              ],
+              "content": "<h3><strong>Personal details</strong></h3>",
+              "refreshOnChange": false,
+              "tableView": false,
+              "key": "html8",
+              "type": "htmlelement",
+              "input": false,
+              "hideOnChildrenHidden": false
+            },
+            {
+              "label": "HTML",
+              "attrs": [
+                {
+                  "attr": "style",
+                  "value": "position:absolute; z-index:1;"
+                }
+              ],
+              "content": "<table style=\"width:100%; font-size:1.2em\">\n<tr style=\"border:solid 0px #eee; \">\n  <td style=\"width:40%;padding:10px 10px 10px 0px;\">Name:</td>\n  <td style=\"width:60%;padding:10px\">{{data.firstName}} {{data.lastName}}</td>\n</tr>\n<tr style=\"border:solid 0px #eee; \">\n  <td style=\"width:40%;padding:10px 10px 10px 0px;\">Residential address:</td>\n  <td style=\"width:60%;padding:10px\">{{data.selectedAddress}}</td>\n</tr>\n<tr style=\"border:solid 0px #eee; \">\n  <td style=\"width:40%;padding:10px 10px 10px 0px;\">Email:</td>\n  <td style=\"width:60%;padding:10px\">{{data.emailAddress}}</td>\n</tr>\n</table>",
+              "refreshOnChange": true,
+              "tableView": false,
+              "key": "html17",
+              "type": "htmlelement",
+              "input": false
+            },
+            {
+              "label": "Select Boxes",
+              "optionsLabelPosition": "right",
+              "hideLabel": true,
+              "tableView": false,
+              "defaultValue": {
+                "iDeclare": true,
+                "iUnderstand": true,
+                "IAmThePersonNamedAbove": true
+              },
+              "values": [
+                {
+                  "label": " I declare that the information I have provided in this form is true and correct to the best of my knowledge. I acknowledge that knowingly providing false, misleading or incorrect information is an offence under the <i>Public Health Act 2005</i> punishable by a fine of $4,004 or a court-imposed penalty of up to $13,345.",
+                  "value": "iDeclare",
+                  "shortcut": ""
+                },
+                {
+                  "label": " I undertake to present for a COVID-19 test if I develop symptoms consistent with COVID-19 within 14 days of entering Queensland.",
+                  "value": "iUnderstand",
+                  "shortcut": ""
+                },
+                {
+                  "label": "I confirm I am the person named above in the “your details” section and I personally completed this Queensland Border Declaration Pass, or I completed this as a parent or guardian on behalf of a child or I provided assistance to a person with special needs. Note employers must NOT complete this pass on behalf of their employees. ",
+                  "value": "IAmThePersonNamedAbove",
+                  "shortcut": ""
+                }
+              ],
+              "key": "selectBoxes1",
+              "type": "selectboxes",
+              "input": true,
+              "inputType": "checkbox"
+            },
+            {
+              "label": "HTML",
+              "attrs": [
+                {
+                  "attr": "style",
+                  "value": "font-size:9pt;"
+                }
+              ],
+              "content": "<p style=\"font-size: 80%\">Your personal information is collected in this document by, or for Queensland Health and Hospital and Health Services (via public health units) for the purpose of responding to a declared public health emergency under the <cite>Public Health Act 2005</cite> (Qld) and may be shared with other Government agencies for that purpose. Government agencies, including Queensland Health, may use your personal information for the purposes of enforcing current border restrictions, contact tracing, to contact you about your undertaking to get a COVID-19 test if you develop symptoms consistent with COVID-19 while present in Queensland, to contact you to provide additional information about your obligations in entering Queensland or for another purpose relating to COVID-19. Personal information provided by you will be securely stored and handled in accordance with the <cite>Information Privacy Act 2009</cite> (Qld).  Personal information recorded in this document will not otherwise be disclosed to other parties without your consent, unless the disclosure is authorised or required by, or under law.  For information about how Queensland Health or the relevant Hospital and Health Service protects your personal information, or to learn about rights to access your own personal information, please see our website at <a href=\"https://www.health.qld.gov.au/global/privacy\" target=\"_blank\">https://www.health.qld.gov.au/global/privacy</a> and <a href=\"https://www.health.qld.gov.au/system-governance/contact-us/access-info/rti-application\" target=\"_blank\">https://www.health.qld.gov.au/system-governance/contact-us/access-info/rti-application</a>.</p>",
+              "refreshOnChange": false,
+              "tableView": false,
+              "key": "html3",
+              "type": "htmlelement",
+              "input": false
+            },
+            {
+              "label": "Conditions of Entry",
+              "attrs": [
+                {
+                  "attr": "",
+                  "value": ""
+                }
+              ],
+              "content": "<h2>Conditions of Entry for freight and logistics operators</h2>\n\n<ol>\n<li>If you have been to a COVID-19 hotspot in the last 14 days, you are permitted to enter Queensland and not required to quarantine under the freight and logistics operators exception, but you must:\n<ul>\n<li>keep and retain written records of close contacts for a 14-day period commencing on their date of arrival in Queensland, or, if they remain in Queensland for a period of less than 14 days, for that period; and</li>\n\n<li>provide the records to an emergency officer (public health) if directed by an emergency officer (public health) or to a contact tracing officer; and</li>\n\n<li>minimise contact with the community for a period of 14 days; and</li>\n\n<li>to the extent reasonably practicable, practise physical distancing including by remaining at least 1.5 metres from other people; and</li>\n\n<li>if you are not a Queensland resident, only remain in Queensland for the time necessary to carry out the activity; and</li>\n\n<li>comply with any relevant requirements under other Public Health Directions; and</li>\n\n<li>comply with the <a href=\"https://www.health.qld.gov.au/system-governance/legislation/cho-public-health-directions-under-expanded-public-health-act-powers/border-restrictions/freight-services-protocol\">Operational protocol for freight movements entering Queensland</a> approved by the Chief Health Officer.</li>\n</ul>\n</li>\n\n<li>A person is a close contact of another person if they are in the company of another person:\n<ul>\n<li>within an enclosed space for a period of 2 hours or longer; or</li>\n<li>within 1.5 metres of the other person for a period of 15 minutes or longer.</li>\n</ul>\n</li>\n\n<li>The records that are required to be kept:\n<ul>\n<li>the name and phone number or email address of the close contact and the day, time and location at which the close contact occurred; or</li>\n<li>if the name and phone number or email address are not known or it is not reasonably practicable to obtain them, the day, time and location which close contact occurred.</li>\n</ul>\n</li>\n\n<li>If there are multiple pass holder present in your vehicle, please display a single pass in order of types: Quarantine (Q), Health Quarantine (HQ), Specialist (S), Freight and Logistics (F), Border Zone Travel (X), General (G), Health (H).</li>\n\n<li>Download the Contact Register Form at: <a href=\"https://www.qld.gov.au/__data/assets/pdf_file/0020/133319/border-pass-contact-register-template.pdf\" title=\"Border pass contact register template\">https://www.qld.gov.au/__data/assets/pdf_file/0020/133319/border-pass-contact-register-template.pdf</a></li>\n</ol>",
+              "refreshOnChange": false,
+              "tableView": false,
+              "key": "conditionsOfEntryTransport",
+              "type": "htmlelement",
+              "input": false
+            }
+          ]
+        },
+        {
+          "hidden": true,
+          "tableView": false,
+          "key": "fieldset",
+          "type": "fieldset",
+          "label": "",
+          "input": false,
+          "components": [
+            {
+              "label": "First Name",
+              "tableView": true,
+              "clearOnHide": false,
+              "validate": {
+                "pattern": "^((?![|&;$%\"<>()\\{\\}+\\\\\\/]).)*$"
+              },
+              "key": "firstName",
+              "type": "textfield",
+              "input": true
+            },
+            {
+              "label": "Last Name",
+              "tableView": true,
+              "clearOnHide": false,
+              "validate": {
+                "pattern": "^((?![|&;$%\"<>()\\{\\}+\\\\\\/]).)*$"
+              },
+              "key": "lastName",
+              "type": "textfield",
+              "input": true
+            },
+            {
+              "label": "Residential Address",
+              "autoExpand": true,
+              "tableView": true,
+              "clearOnHide": false,
+              "validate": {
+                "pattern": "^((?![|&;$%\"<>()\\{\\}+\\\\\\/]).)*$"
+              },
+              "key": "selectedAddress",
+              "type": "textarea",
+              "input": true
+            },
+            {
+              "label": "Explanation",
+              "autoExpand": true,
+              "tableView": true,
+              "clearOnHide": false,
+              "validate": {
+                "pattern": "^((?![|&;$%\"<>()\\{\\}+\\\\\\/]).)*$"
+              },
+              "key": "explanation",
+              "type": "textarea",
+              "input": true
+            },
+            {
+              "label": "Phone number",
+              "description": "Please include area code for landline",
+              "inputMask": "9999999999",
+              "tableView": true,
+              "validate": {
+                "required": true,
+                "pattern": "^((?![|&;$%\"<>()\\{\\}+\\\\\\/]).)*$",
+                "minLength": 10,
+                "maxLength": 10
+              },
+              "key": "phoneNumber",
+              "type": "textfield",
+              "input": true
+            },
+            {
+              "label": "Email address",
+              "tableView": true,
+              "clearOnHide": false,
+              "validate": {
+                "pattern": "^((?![|&;$%\"<>()\\{\\}+\\\\\\/]).)*$"
+              },
+              "key": "emailAddress",
+              "type": "textfield",
+              "input": true
+            },
+            {
+              "label": "CET",
+              "tableView": true,
+              "clearOnHide": false,
+              "key": "cet",
+              "type": "textfield",
+              "input": true
+            },
+            {
+              "label": "Form type",
+              "tableView": true,
+              "key": "formType",
+              "type": "textfield",
+              "input": true
+            },
+            {
+              "label": "Pass type",
+              "tableView": true,
+              "clearOnHide": false,
+              "validate": {
+                "pattern": "^((?![|&;$%\"<>()\\{\\}+\\\\\\/]).)*$"
+              },
+              "key": "passType",
+              "type": "textfield",
+              "input": true
+            },
+            {
+              "label": "Secure token",
+              "tableView": true,
+              "key": "secureToken",
+              "type": "textfield",
+              "input": true
+            },
+            {
+              "label": "Submission environment",
+              "tableView": true,
+              "key": "submissionEnvironment",
+              "type": "textfield",
+              "input": true
+            },
+            {
+              "label": "IP Address",
+              "autoExpand": false,
+              "tableView": true,
+              "key": "ipAddress",
+              "type": "textarea",
+              "input": true
+            }
+          ]
+        },
+        {
+          "label": "Submit",
+          "showValidations": false,
+          "tableView": false,
+          "key": "submit",
+          "type": "button",
+          "input": true
+        }
+      ],
+      "properties": {},
+      "controller": ""
+    },
+    "qdapSettings": {
+      "title": "QDAP settings",
+      "type": "form",
+      "name": "qdapSettings",
+      "path": "qdapsettings",
+      "display": "form",
+      "tags": [],
+      "settings": {},
+      "components": [
+        {
+          "label": "HTML",
+          "tag": "p",
+          "className": "",
+          "attrs": [
+            {
+              "attr": "",
+              "value": ""
+            }
+          ],
+          "content": "See \"Action\"",
+          "refreshOnChange": false,
+          "customClass": "",
+          "hidden": false,
+          "modalEdit": false,
+          "key": "html",
+          "tags": [],
+          "properties": {},
+          "conditional": {
+            "show": null,
+            "when": null,
+            "eq": "",
+            "json": ""
+          },
+          "customConditional": "",
+          "logic": [],
+          "attributes": {},
+          "overlay": {
+            "style": "",
+            "page": "",
+            "left": "",
+            "top": "",
+            "width": "",
+            "height": ""
+          },
+          "type": "htmlelement",
+          "input": false,
+          "placeholder": "",
+          "prefix": "",
+          "suffix": "",
+          "multiple": false,
+          "defaultValue": null,
+          "protected": false,
+          "unique": false,
+          "persistent": false,
+          "clearOnHide": true,
+          "refreshOn": "",
+          "redrawOn": "",
+          "tableView": false,
+          "labelPosition": "top",
+          "description": "",
+          "errorLabel": "",
+          "tooltip": "",
+          "hideLabel": false,
+          "tabindex": "",
+          "disabled": false,
+          "autofocus": false,
+          "dbIndex": false,
+          "customDefaultValue": "",
+          "calculateValue": "",
+          "calculateServer": false,
+          "widget": null,
+          "validateOn": "change",
+          "validate": {
+            "required": false,
+            "custom": "",
+            "customPrivate": false,
+            "strictDateValidation": false,
+            "multiple": false,
+            "unique": false
+          },
+          "allowCalculateOverride": false,
+          "encrypted": false,
+          "showCharCount": false,
+          "showWordCount": false,
+          "allowMultipleMasks": false,
+          "id": "e5wip8r"
+        }
+      ],
+      "properties": {},
+      "controller": ""
+    },
+    "adminLogin": {
+      "title": "Admin Login",
+      "type": "form",
+      "name": "adminLogin",
+      "path": "admin/login",
+      "tags": [],
+      "components": [
+        {
+          "type": "email",
+          "persistent": true,
+          "unique": false,
+          "protected": false,
+          "defaultValue": "",
+          "suffix": "",
+          "prefix": "",
+          "placeholder": "Enter your email address",
+          "key": "email",
+          "lockKey": true,
+          "label": "Email",
+          "inputType": "email",
+          "tableView": true,
+          "input": true
+        },
+        {
+          "type": "password",
+          "persistent": true,
+          "protected": true,
+          "suffix": "",
+          "prefix": "",
+          "placeholder": "Enter your password.",
+          "key": "password",
+          "lockKey": true,
+          "label": "Password",
+          "inputType": "password",
+          "tableView": false,
+          "input": true
+        },
+        {
+          "type": "button",
+          "theme": "primary",
+          "disableOnInvalid": true,
+          "action": "submit",
+          "block": false,
+          "rightIcon": "",
+          "leftIcon": "",
+          "size": "md",
+          "key": "submit",
+          "tableView": false,
+          "label": "Submit",
+          "input": true
+        }
+      ]
+    },
+    "userRegister": {
+      "title": "User Register",
+      "type": "form",
+      "name": "userRegister",
+      "path": "user/register",
+      "tags": [],
+      "components": [
+        {
+          "type": "email",
+          "persistent": true,
+          "unique": false,
+          "protected": false,
+          "defaultValue": "",
+          "suffix": "",
+          "prefix": "",
+          "placeholder": "Enter your email address",
+          "key": "email",
+          "lockKey": true,
+          "label": "Email",
+          "inputType": "email",
+          "tableView": true,
+          "input": true
+        },
+        {
+          "type": "password",
+          "persistent": true,
+          "protected": true,
+          "suffix": "",
+          "prefix": "",
+          "placeholder": "Enter your password.",
+          "key": "password",
+          "lockKey": true,
+          "label": "Password",
+          "inputType": "password",
+          "tableView": false,
+          "input": true
+        },
+        {
+          "theme": "primary",
+          "disableOnInvalid": true,
+          "action": "submit",
+          "block": false,
+          "rightIcon": "",
+          "leftIcon": "",
+          "size": "md",
+          "key": "submit",
+          "label": "Submit",
+          "input": true,
+          "type": "button"
+        }
+      ]
+    },
+    "userLogin": {
+      "title": "User Login",
+      "type": "form",
+      "name": "userLogin",
+      "path": "user/login",
+      "tags": [],
+      "components": [
+        {
+          "type": "email",
+          "persistent": true,
+          "unique": false,
+          "protected": false,
+          "defaultValue": "",
+          "suffix": "",
+          "prefix": "",
+          "placeholder": "Enter your email address",
+          "key": "email",
+          "lockKey": true,
+          "label": "Email",
+          "inputType": "email",
+          "tableView": true,
+          "input": true
+        },
+        {
+          "type": "password",
+          "persistent": true,
+          "protected": true,
+          "suffix": "",
+          "prefix": "",
+          "placeholder": "Enter your password.",
+          "key": "password",
+          "lockKey": true,
+          "label": "Password",
+          "inputType": "password",
+          "tableView": false,
+          "input": true
+        },
+        {
+          "type": "button",
+          "theme": "primary",
+          "disableOnInvalid": true,
+          "action": "submit",
+          "block": false,
+          "rightIcon": "",
+          "leftIcon": "",
+          "size": "md",
+          "key": "submit",
+          "tableView": false,
+          "label": "Submit",
+          "input": true
+        }
+      ]
+    }
+  },
+  "actions": {
+    "adminLogin:login": {
+      "title": "Login",
+      "name": "login",
+      "form": "adminLogin",
+      "settings": {
+        "resources": [
+          "admin"
+        ],
+        "username": "email",
+        "password": "password",
+        "allowedAttempts": 5,
+        "attemptWindow": 30,
+        "lockWait": 1800
+      },
+      "priority": 2,
+      "method": [
+        "create"
+      ],
+      "handler": [
+        "before"
+      ]
+    },
+    "admin:role": {
+      "title": "Role Assignment",
+      "name": "role",
+      "form": "admin",
+      "settings": {
+        "association": "new",
+        "type": "add",
+        "role": "administrator"
+      },
+      "priority": 1,
+      "method": [
+        "create"
+      ],
+      "handler": [
+        "after"
+      ]
+    },
+    "admin:save": {
+      "title": "Save Submission",
+      "name": "save",
+      "form": "admin",
+      "priority": 10,
+      "method": [
+        "create",
+        "update"
+      ],
+      "handler": [
+        "before"
+      ]
+    },
+    "userLogin:login": {
+      "title": "Login",
+      "name": "login",
+      "form": "userLogin",
+      "settings": {
+        "resources": [
+          "5b4ffedb1c8da0573e2859b0"
+        ],
+        "username": "email",
+        "password": "password",
+        "allowedAttempts": 5,
+        "attemptWindow": 30,
+        "lockWait": 1800
+      },
+      "priority": 2,
+      "method": [
+        "create"
+      ],
+      "handler": [
+        "before"
+      ]
+    },
+    "user:role": {
+      "title": "Role Assignment",
+      "name": "role",
+      "form": "user",
+      "settings": {
+        "association": "new",
+        "type": "add",
+        "role": "authenticated"
+      },
+      "priority": 1,
+      "method": [
+        "create"
+      ],
+      "handler": [
+        "after"
+      ]
+    },
+    "user:save": {
+      "title": "Save Submission",
+      "name": "save",
+      "form": "user",
+      "priority": 10,
+      "method": [
+        "create",
+        "update"
+      ],
+      "handler": [
+        "before"
+      ]
+    },
+    "userRegister:save": {
+      "title": "Save Submission",
+      "name": "save",
+      "form": "userRegister",
+      "settings": {
+        "resource": "",
+        "fields": {
+          "email": "email",
+          "password": "password"
+        }
+      },
+      "priority": 10,
+      "method": [
+        "create",
+        "update"
+      ],
+      "handler": [
+        "before"
+      ]
+    },
+    "userRegister:login": {
+      "title": "Login",
+      "name": "login",
+      "form": "userRegister",
+      "settings": {
+        "resources": [
+          "5b4ffedb1c8da0573e2859b0"
+        ],
+        "username": "email",
+        "password": "password"
+      },
+      "priority": 2,
+      "method": [
+        "create"
+      ],
+      "handler": [
+        "before"
+      ]
+    },
+    "keywords:save": {
+      "title": "Save Submission",
+      "name": "save",
+      "form": "keywords",
+      "priority": 10,
+      "method": [
+        "create",
+        "update"
+      ],
+      "handler": [
+        "before"
+      ]
+    },
+    "exampleTextFieldsWithRegex:save": {
+      "title": "Save Submission",
+      "name": "save",
+      "form": "exampleTextFieldsWithRegex",
+      "priority": 10,
+      "method": [
+        "create",
+        "update"
+      ],
+      "handler": [
+        "before"
+      ]
+    },
+    "reCaptchaAndMessage:save": {
+      "title": "Save Submission",
+      "name": "save",
+      "form": "reCaptchaAndMessage",
+      "priority": 10,
+      "method": [
+        "create",
+        "update"
+      ],
+      "handler": [
+        "before"
+      ]
+    },
+    "qdapSettings:webhook": {
+      "title": "Post to DIS Storage",
+      "name": "webhook",
+      "form": "qdapSettings",
+      "condition": {
+        "eq": "",
+        "value": "",
+        "custom": ""
+      },
+      "settings": {
+        "method": "post",
+        "url": "https://dataxfunction.forms.platforms.qld.gov.au/api/ProcessFormRequest?code=hJDOKa0L86aaBKTqoMWTKB5PJjpoEaaPLoa2ea5AhIu7nv4Ae6NSsg==",
+        "forwardHeaders": false,
+        "username": "onlineproducts@smartservice.qld.gov.au",
+        "password": "xO4A15y*ja1b",
+        "headers": [
+          {
+            "header": "",
+            "value": ""
+          }
+        ],
+        "transform": "",
+        "block": false,
+        "externalIdType": "",
+        "externalIdPath": ""
+      },
+      "priority": 0,
+      "method": [
+        "create",
+        "update",
+        "delete"
+      ],
+      "handler": [
+        "after"
+      ]
+    },
+    "samplePdfSettings:save": {
+      "title": "Save Submission",
+      "name": "save",
+      "form": "samplePdfSettings",
+      "priority": 10,
+      "method": [
+        "create",
+        "update"
+      ],
+      "handler": [
+        "before"
+      ]
+    }
+  },
+  "resources": {
+    "reCaptchaAndMessage": {
+      "title": "reCAPTCHA and message",
+      "type": "resource",
+      "name": "reCaptchaAndMessage",
+      "path": "recaptchaandmessage",
+      "display": "form",
+      "tags": [],
+      "settings": {},
+      "components": [
+        {
+          "eventType": "buttonClick",
+          "key": "reCaptcha",
+          "type": "recaptcha",
+          "input": true,
+          "tableView": false,
+          "label": "reCAPTCHA"
+        },
+        {
+          "label": "HTML",
+          "className": "captchaPrivacyTerms",
+          "attrs": [
+            {
+              "attr": "",
+              "value": ""
+            }
+          ],
+          "content": "<p></p>\nThis site is protected by reCAPTCHA and the Google\n<a href=\"https://policies.google.com/privacy\">Privacy Policy</a> and\n<a href=\"https://policies.google.com/terms\">Terms of Service</a> apply.",
+          "refreshOnChange": false,
+          "tableView": false,
+          "key": "html",
+          "customConditional": "show = (data['didYouLeaveFromQueensland'] == 'no' || data['travelToTheHotspotForAWorkRelatedPurpose'] == 'yes')",
+          "type": "htmlelement",
+          "input": false
+        }
+      ],
+      "properties": {},
+      "controller": ""
+    },
+    "exampleTextFieldsWithRegex": {
+      "title": "Example Text fields with regex",
+      "type": "resource",
+      "name": "exampleTextFieldsWithRegex",
+      "path": "exampletextfieldswithregex",
+      "display": "form",
+      "tags": [],
+      "settings": {},
+      "components": [
+        {
+          "label": "ABN or ACN",
+          "tableView": true,
+          "redrawOn": "submit",
+          "validate": {
+            "pattern": "^(\\d\\s?){9,11}$",
+            "customMessage": "ABN and ACN must be a number between 8 and 11 characters in length"
+          },
+          "key": "abnAcn",
+          "type": "textfield",
+          "input": true
+        },
+        {
+          "label": "Phone number",
+          "description": "Please include area code for landline",
+          "inputMask": "9999999999",
+          "tableView": true,
+          "validate": {
+            "required": true,
+            "pattern": "^((?![|&;$%\"'<>()\\{\\}+\\\\\\/]).)*$",
+            "customMessage": "Please enter a valid phone number",
+            "minLength": 10,
+            "maxLength": 10
+          },
+          "key": "contactPhone",
+          "type": "textfield",
+          "input": true
+        },
+        {
+          "label": "Address line 1",
+          "tableView": true,
+          "validate": {
+            "required": true,
+            "pattern": "^((?![|;$%\"<>()\\\\\\{\\}+\\\\\\/]).)*$",
+            "customMessage": "Please do not include html or special characters e.g. not any of these |&;$%\"'<>(){}+\\/ and not exceeding 40 characters",
+            "maxLength": 40
+          },
+          "key": "venueAddress1",
+          "type": "textfield",
+          "input": true
+        },
+        {
+          "label": "Address line 2",
+          "tableView": true,
+          "validate": {
+            "pattern": "^((?![|&;$%\"'<>()\\\\\\{\\}+\\\\\\/]).)*$",
+            "customMessage": "Please do not include html or special characters e.g. not any of these |&;$%\"'<>(){}+\\/ and not exceeding 40 characters",
+            "maxLength": 40
+          },
+          "key": "venueAddress2",
+          "type": "textfield",
+          "input": true
+        },
+        {
+          "label": "Address line 3",
+          "tableView": true,
+          "validate": {
+            "pattern": "^((?![|&;$%\"'<>()\\\\\\{\\}+\\\\\\/]).)*$",
+            "customMessage": "Please do not include html or special characters e.g. not any of these |&;$%\"'<>(){}+\\/ and not exceeding 40 characters",
+            "maxLength": 40
+          },
+          "key": "venueAddress3",
+          "type": "textfield",
+          "input": true
+        },
+        {
+          "label": "Town, city or suburb",
+          "tableView": true,
+          "validate": {
+            "required": true,
+            "pattern": "^((?![|&;$%\"'<>()\\\\\\{\\}+\\\\\\/]).)*$",
+            "customMessage": "Please do not include html or special characters e.g. not any of these |&;$%\"'<>(){}+\\/ and not exceeding 40 characters",
+            "maxLength": 40
+          },
+          "key": "city",
+          "type": "textfield",
+          "input": true
+        },
+        {
+          "label": "Postcode",
+          "tableView": true,
+          "validate": {
+            "required": true,
+            "pattern": "^([0-9]{4})$",
+            "customMessage": "Invalid postcode format",
+            "minLength": 4,
+            "maxLength": 4
+          },
+          "key": "postcode",
+          "type": "textfield",
+          "input": true
+        },
+        {
+          "label": "State",
+          "widget": "choicesjs",
+          "placeholder": "Select state or territory",
+          "tableView": true,
+          "defaultValue": "QLD",
+          "data": {
+            "values": [
+              {
+                "label": "Australian Capital Territory",
+                "value": "ACT"
+              },
+              {
+                "label": "New South Wales",
+                "value": "NSW"
+              },
+              {
+                "label": "Northern Territory",
+                "value": "NT"
+              },
+              {
+                "label": "Queensland",
+                "value": "QLD"
+              },
+              {
+                "label": "South Australia",
+                "value": "SA"
+              },
+              {
+                "label": "Tasmania",
+                "value": "TAS"
+              },
+              {
+                "label": "Victoria",
+                "value": "VIC"
+              },
+              {
+                "label": "Western Australia",
+                "value": "WA"
+              }
+            ]
+          },
+          "selectThreshold": 0.3,
+          "validate": {
+            "required": true,
+            "custom": "var re = /^((?![|&;$%\"'<>()\\{\\}+\\\\\\/]).)*$/;\r\nif (input && !re.test(input)) {\r\n  valid = 'Please do not include html or special characters e.g. not any of these |&;$%\\\"\\'<>(){}+\\/ and not exceeding 40 characters';\r\n}"
+          },
+          "key": "state",
+          "attributes": {
+            "autocomplete": "off",
+            "": "readonly",
+            "readonly": "readonly"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        }
+      ],
+      "properties": {},
+      "controller": ""
+    },
+    "keywords": {
+      "title": "Keywords",
+      "type": "resource",
+      "name": "keywords",
+      "path": "keywords",
+      "display": "form",
+      "tags": [],
+      "settings": {},
+      "components": [
+        {
+          "label": "keywords",
+          "calculateValue": "value = {\r\n  \"partialKeywords\": [\r\n    'A domestic', 'Domestic', 'Bomb','Abduc', 'Abus', 'Aggrieved', 'Allahu', 'Annihilat', 'Armed', 'Assassin', 'Assault', 'Atrocity', 'Attack', 'Beat', 'Behead', 'Belts her', 'Belts him', 'Belts me', 'Blast', 'Blood', 'Blow up', 'Bomb', 'Bondage', 'Burning', 'Captive', 'Casualt', 'Chok', 'Conquer', 'Cries', 'Crying', 'Cut her throat', 'Cut her wrists', 'Cut his throat', 'Cut his wrists', 'Cut my wrists', 'Cut myself', 'Cut their throats', 'Cut their wrists', 'Cut wrists', 'Cutting her throat', 'Cutting her wrists', 'Cutting his throat', 'Cutting his wrists', 'Cutting my wrists', 'Cutting their throats', 'Cutting their wrists', 'Cutting wrists', 'Danger', 'Dead', 'Deat', 'Domestic Disturbance', 'Domestic Violence', 'Drunk', 'Detonate', 'Devastat', 'Die', 'dv application', 'dv breach', 'dv order', 'Do her in', 'Do him in', 'Do me in', 'Do myself in', 'Do them in', 'Dying', 'End my life', 'Enemy', 'Erection', 'Execut', 'Explode', 'Explos', 'Fatal', 'Fear', 'Fighting', 'firearm', 'Gun', 'Genocide', 'Handcuff', 'Harm', 'Hatred', 'Home invasion', 'Hostage', 'Hurt her', 'Hurt him', 'Hurt me', 'Hurt my children', 'Hurt my kids', 'Hurt them', 'Insurgen', 'Intimid', 'Invade', 'Invasion', 'incest', 'Kidnap', 'Knife', 'Knives', 'Martyr', 'Massacre', 'masturbat', 'Milit', 'miscarr', 'molest', 'murder', 'Nothing to lose', 'overdos', 'Paedo', 'Paradise', 'Partner rage', 'Peado', 'Peda', 'Pedif', 'Pedip', 'Pedop', 'penis', 'porn', 'Punch', 'rape', 'raping', 'rapist', 'Respondent', 'Restrains', 'Sacrifice', 'Scream', 'self harm', 'self-harm', 'Shoot', 'Shot', 'Slaughter', 'Slit her throat', 'Slit her wrists', 'Slit his throat', 'Slit his wrists', 'Slit my wrists', 'Slit their throats', 'Slit their wrists', 'Slit wrists', 'Slitting her throat', 'Slitting her wrists', 'Slitting his throat', 'Slitting his wrists', 'Slitting my wrists', 'Slitting their throats', 'Slitting their wrists', 'Slitting wrists', 'Stab her', 'Stab him', 'Stab me', 'Stab myself', 'Stab them', 'strangle', 'suicid', 'terror', 'threat', 'Trigger', 'Ties up', 'To die', 'Top herself', 'Top himself', 'Top myself', 'Top themself', 'Top themselves', 'vagina', 'Violent rage', 'Weapon', 'Welfare check', 'Victim', 'Violen', 'Warning', 'Yelling'\r\n  ],\r\n  \"wholeKeywords\": [\r\n    'Bash', 'DV', 'Domestic', 'Bomb', 'dvo', 'Isis', 'Kill', 'hit'\r\n  ]\r\n};",
+          "key": "keywords",
+          "type": "hidden",
+          "input": true,
+          "tableView": false
+        }
+      ],
+      "properties": {},
+      "controller": ""
+    },
+    "admin": {
+      "title": "Admin",
+      "type": "resource",
+      "name": "admin",
+      "path": "admin",
+      "tags": [],
+      "components": [
+        {
+          "type": "email",
+          "persistent": true,
+          "unique": false,
+          "protected": false,
+          "defaultValue": "",
+          "suffix": "",
+          "prefix": "",
+          "placeholder": "Enter your email address",
+          "key": "email",
+          "label": "Email",
+          "inputType": "email",
+          "tableView": true,
+          "input": true
+        },
+        {
+          "type": "password",
+          "persistent": true,
+          "protected": true,
+          "suffix": "",
+          "prefix": "",
+          "placeholder": "Enter your password.",
+          "key": "password",
+          "label": "Password",
+          "inputType": "password",
+          "tableView": false,
+          "input": true
+        },
+        {
+          "type": "button",
+          "theme": "primary",
+          "disableOnInvalid": true,
+          "action": "submit",
+          "block": false,
+          "rightIcon": "",
+          "leftIcon": "",
+          "size": "md",
+          "key": "submit",
+          "tableView": false,
+          "label": "Submit",
+          "input": true
+        }
+      ]
+    },
+    "user": {
+      "title": "User",
+      "type": "resource",
+      "name": "user",
+      "path": "user",
+      "tags": [],
+      "components": [
+        {
+          "type": "email",
+          "persistent": true,
+          "unique": false,
+          "protected": false,
+          "defaultValue": "",
+          "suffix": "",
+          "prefix": "",
+          "placeholder": "Enter your email address",
+          "key": "email",
+          "label": "Email",
+          "inputType": "email",
+          "tableView": true,
+          "input": true
+        },
+        {
+          "type": "password",
+          "persistent": true,
+          "protected": true,
+          "suffix": "",
+          "prefix": "",
+          "placeholder": "Enter your password.",
+          "key": "password",
+          "label": "Password",
+          "inputType": "password",
+          "tableView": false,
+          "input": true
+        },
+        {
+          "type": "button",
+          "theme": "primary",
+          "disableOnInvalid": true,
+          "action": "submit",
+          "block": false,
+          "rightIcon": "",
+          "leftIcon": "",
+          "size": "md",
+          "key": "submit",
+          "tableView": false,
+          "label": "Submit",
+          "input": true
+        }
+      ]
+    }
+  },
+  "excludeAccess": true
+}
