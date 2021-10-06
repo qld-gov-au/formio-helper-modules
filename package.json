@@ -1,0 +1,19 @@
+{
+  "name": "formio-matrix-widget",
+  "version": "1.0.0",
+  "description": "Squiz matrix content container template for formio",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "javascript-obfuscator src/index.js --output ./dist/script.min.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@servicesmadesimpler.govnet.qld.gov.au:7999/qldgov/formio-widget.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "javascript-obfuscator": "^2.19.0"
+  }
+}
