@@ -7,6 +7,7 @@ window.onload = function () {
     body_container: $("body"),
     formio_container: $("#formio"),
     defaultRedirect: "contact-us/response/",
+    submitBtn: "#submitButton",
     defaultIcons: "fontawesome",
   };
 
@@ -53,13 +54,9 @@ window.onload = function () {
     formModified = form._form.modified;
 
     //Force new tab on formlinks
-    config.body_container.on(
-      "click",
-      config.formio_container + " a",
-      function (e) {
-        e.target.target = "_blank";
-      }
-    );
+    config.body_container.on("click", "#formio a", function (e) {
+      e.target.target = "_blank";
+    });
 
     //Change event/GTM
     wizard.on("click", function (wizard, change) {
@@ -84,8 +81,8 @@ window.onload = function () {
     });
 
     //Must use 'applicationSubmit' custom event on primary submit
-    wizard.on("applicationSubmit", function () {
-      $("#submitButton").attr("disabled", true);
+    wizard.on("applicationSubmit", function (data) {
+      $(config.submitBtn).attr("disabled", true).addClass("sr-only");
       wizard
         .submit()
         .then(function () {
@@ -97,7 +94,7 @@ window.onload = function () {
           }
         })
         .catch(function () {
-          console.debug(config.logError);
+          console.debug("Submission error");
         });
     });
   });
