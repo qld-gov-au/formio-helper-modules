@@ -7,10 +7,6 @@ window.onload = function () {
     body_container: $("body"),
     formio_container: $("#formio"),
     defaultRedirect: "contact-us/response/",
-    defaultMode: false,
-    defaultType: "alert alert-warning",
-    defaultTitle: "Maintenance",
-    defaultMessage: "Description",
     defaultIcons: "fontawesome",
   };
 
@@ -22,25 +18,10 @@ window.onload = function () {
         formio_config.form_name,
       form_confirmation:
         formio_config.form_confirmation || config.defaultRedirect,
-      maintenance_mode: formio_config.maintenance_mode || config.defaultMode,
-      maintenance_type: formio_config.maintenance_type || config.defaultType,
-      maintenance_title: formio_config.maintenance_title || config.defaultTitle,
-      maintenance_message:
-        formio_config.maintenance_message || config.defaultMessage,
       submitBtn: config.submitBtn || $("div#formio button.btn-primary"),
     }, //Use widget values or fallback
     formName, //GTM
     formModified; //GTM
-
-  //Alerts
-  var maintenance_alert =
-    "<div id='formio_maintenance_alert' role='alert' class=" +
-    form_metadata.maintenance_type +
-    "><h2>" +
-    form_metadata.maintenance_title +
-    "</h2><p>" +
-    form_metadata.maintenance_message +
-    "</p></div>";
 
   //Init form
   Formio.icons = config.defaultIcons;
@@ -70,12 +51,6 @@ window.onload = function () {
     window.form = wizard;
     formName = form._form.title;
     formModified = form._form.modified;
-
-    //Check if maintenance mode is enabled - disable and replace banner
-    if (form_metadata.maintenance_mode.toLowerCase() == "true") {
-      form_metadata.maintenance_type.replace(/ /g, "%20");
-      $(maintenance_alert).prependTo("#formio");
-    }
 
     //Force new tab on formlinks
     config.body_container.on(
@@ -110,9 +85,7 @@ window.onload = function () {
 
     //Must use 'applicationSubmit' custom event on primary submit
     wizard.on("applicationSubmit", function () {
-      //Disable button
       $("#submitButton").attr("disabled", true);
-      console.log("disabled");
       wizard
         .submit()
         .then(function () {
