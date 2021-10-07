@@ -6,23 +6,26 @@
 
 ### The content container template (#144179) contains:
 
-- Metadata schema (input values):
-  --- Project name (project name set in Form.io)
-  --- Form name (name of form under project mentioned above)
-  --- Revision number (used to pull exact version otherwise fallback to latest)
-  --- Confirmation page (relative URL behind qld.gov.au, e.g. qld.gov.au/contactus/response would be 'contactus/response' as value)
+#### Metadata schema (input values):
 
-- Paint layout (interface between script/user values)
-  --- NoScript/unsupported browser
-  --- Loader DOM object/spinner (#formio)
-  --- Formio config object (repeats values entered in metadata schema and is used by formio-loader.js script)
+- Project name (project name set in Form.io)
+- Form name (name of form under project mentioned above)
+- Revision number (used to pull exact version otherwise fallback to latest)
+- Confirmation page (relative URL behind qld.gov.au, e.g. qld.gov.au/contactus/response would be 'contactus/response' as value)
 
-- Header styles (see guide):
-  --- Formio CSS, JS and premium CSS/JS
-  --- QGOV CSS overrides (asset in this repository under src/styles.css)
+#### Paint layout (interface between script/user values)
+
+- NoScript/unsupported browser
+- Loader DOM object/spinner (#formio)
+- Formio config object (repeats values entered in metadata schema and is used by formio-loader.js script)
+
+#### Header styles (see guide):
+
+- Formio CSS, JS and premium CSS/JS
+- QGOV CSS overrides (asset in this repository under src/styles.css)
 - Footer extras (see guide):
-  -- formio-loader.js (this repository)
-  -- browser-support.js (this repository contains a copy)
+- formio-loader.js (this repository)
+- browser-support.js (this repository contains a copy)
 
 ---
 
@@ -91,9 +94,10 @@
 
 ### Required assets in Matrix:
 
-- #144316 (header styles):
-  -- contains Font awesome, formio lib (JS), formio lib (CSS), formio premium (CSS and JS)
-  -- QGOV css overrides (see ./src/styles)
+#### #144316 (header styles):
+
+- contains Font awesome, formio lib (JS), formio lib (CSS), formio premium (CSS and JS)
+- QGOV css overrides (see ./src/styles)
 
 ```html
 <link
@@ -112,9 +116,10 @@
 <link href="./?a=167559" rel="stylesheet" />
 ```
 
-- #144219 (footer extras) contains:
-  -- formio-loader.js (./src/script.js in this repository)
-  -- browser-support.js (lives in Matrix, a copy is available under ./matrix-asset-examples in this repository)
+#### #144219 (footer extras) contains:
+
+- formio-loader.js (./src/script.js in this repository)
+- browser-support.js (lives in Matrix, a copy is available under ./matrix-asset-examples in this repository)
 
 ```html
 <!--@@ Require javascript @@-->
