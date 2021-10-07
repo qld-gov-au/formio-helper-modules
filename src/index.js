@@ -1,18 +1,16 @@
 window.onload = function () {
   window.dataLayer = window.dataLayer || [];
 
-  //widget config
+  //Widget config (should not change):
   var config = {
-    baseUrl: "https://api.forms.platforms.qld.gov.au",
-    body_container: $("body"),
-    formio_container: $("#formio"),
-    defaultRedirect: "contact-us/response/",
-    submitBtn: "#submitButton",
-    defaultIcons: "fontawesome",
-  };
-
-  //Matrix widget values or default
-  var form_metadata = {
+      baseUrl: "https://api.forms.platforms.qld.gov.au",
+      body_container: $("body"),
+      formio_container: $("#formio"),
+      defaultRedirect: "contact-us/response/",
+      submitBtn: "#submitButton",
+      defaultIcons: "fontawesome",
+    }, //Matrix widget values or default:
+    form_metadata = {
       project_name: formio_config.project_name,
       form_name:
         formio_config.form_name + "/v/" + formio_config.form_revision ||
@@ -21,8 +19,8 @@ window.onload = function () {
         formio_config.form_confirmation || config.defaultRedirect,
       submitBtn: config.submitBtn || $("div#formio button.btn-primary"),
     }, //Use widget values or fallback
-    formName, //GTM
-    formModified; //GTM
+    formName, //GTM values
+    formModified; //GTM values
 
   //Init form
   Formio.icons = config.defaultIcons;
