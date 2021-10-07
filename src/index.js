@@ -8,46 +8,42 @@ window.onload = function () {
     formio_container: $("#formio"),
     defaultRedirect: "contact-us/response/",
     defaultMode: false,
-    defaultType: "alert-warning",
-    defaultIcon: "fa-exclamation-triangle",
+    defaultType: "alert alert-warning",
     defaultTitle: "Maintenance",
     defaultMessage: "Description",
-    disableForm: false,
+    defaultIcons: "fontawesome",
   };
 
   //Matrix widget values or default
   var form_metadata = {
-    project_name: formio_config.project_name,
-    form_name:
-      formio_config.form_name + "/v/" + formio_config.form_revision ||
-      formio_config.form_name,
-    form_confirmation:
-      formio_config.form_confirmation || config.defaultRedirect,
-    form_disable: formio_config.disableForm || config.disableForm,
-    maintenance_mode: formio_config.maintenance_mode || config.defaultMode,
-    maintenance_type: formio_config.maintenance_type || config.defaultMode,
-    maintenance_icon: formio_config.maintenance_icon || config.defaultType,
-    maintenance_title: formio_config.maintenance_title || config.defaultTitle,
-    maintenance_message:
-      formio_config.maintenance_message || config.defaultMessage,
-    submitBtn: config.submitBtn || $("div#formio button.btn-primary"),
-  };
-  var formName, formModified; //GTM
+      project_name: formio_config.project_name,
+      form_name:
+        formio_config.form_name + "/v/" + formio_config.form_revision ||
+        formio_config.form_name,
+      form_confirmation:
+        formio_config.form_confirmation || config.defaultRedirect,
+      maintenance_mode: formio_config.maintenance_mode || config.defaultMode,
+      maintenance_type: formio_config.maintenance_type || config.defaultType,
+      maintenance_title: formio_config.maintenance_title || config.defaultTitle,
+      maintenance_message:
+        formio_config.maintenance_message || config.defaultMessage,
+      submitBtn: config.submitBtn || $("div#formio button.btn-primary"),
+    }, //Use widget values or fallback
+    formName, //GTM
+    formModified; //GTM
 
   //Alerts
   var maintenance_alert =
-    "<div id='formio_maintenance_alert' class='alert " +
+    "<div id='formio_maintenance_alert' role='alert' class=" +
     form_metadata.maintenance_type +
-    " role='alert'><h2><i class='fa " +
-    form_metadata.maintenance_icon +
-    "></i>" +
+    "><h2>" +
     form_metadata.maintenance_title +
     "</h2><p>" +
     form_metadata.maintenance_message +
     "</p></div>";
 
   //Init form
-  Formio.icons = "fontawesome";
+  Formio.icons = config.defaultIcons;
   Formio.use(premium);
   Formio.setBaseUrl(config.baseUrl);
   Formio.setProjectUrl(config.baseUrl + "/" + form_metadata.project_name);
@@ -76,11 +72,9 @@ window.onload = function () {
     formModified = form._form.modified;
 
     //Check if maintenance mode is enabled - disable and replace banner
-    if (form_metadata.maintenance_mode == "TRUE") {
-      $(maintenance_alert).after("body .qg-primary-content h1");
-      if (form_metadata.form_disable == "TRUE") {
-        $(config.formio_container).remove();
-      }
+    if (form_metadata.maintenance_mode.toLowerCase() == "true") {
+      form_metadata.maintenance_type.replace(/ /g, "%20");
+      $(maintenance_alert).prependTo("#formio");
     }
 
     //Force new tab on formlinks
@@ -118,6 +112,7 @@ window.onload = function () {
     wizard.on("applicationSubmit", function () {
       //Disable button
       $("#submitButton").attr("disabled", true);
+      console.log("disabled");
       wizard
         .submit()
         .then(function () {
