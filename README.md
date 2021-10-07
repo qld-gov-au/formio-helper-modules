@@ -4,6 +4,20 @@
 
 - Official published guide (https://www.qld.gov.au/_resources/matrix-documentation/components/formio-forms)
 
+## Development assets
+
+- Container template #177549
+- Footer scripts #146360
+- Header scripts #167565
+- Test page(s) (https://www.qld.gov.au/dev/formio-widget/test/_nocache)
+
+## Production assets
+
+- Container template
+- Footer scripts #144219
+- Header scripts #144316
+- Production page (https://www.qld.gov.au/contact-us)
+
 ### The content container template (#144179) contains:
 
 #### Metadata schema (input values):
