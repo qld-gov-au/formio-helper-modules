@@ -7,7 +7,6 @@ window.onload = function () {
       body_container: $("body"),
       formio_container: $("#formio"),
       defaultRedirect: "contact-us/response/",
-      submitBtn: "#submitButton",
       defaultIcons: "fontawesome",
     }, //Matrix widget values or default:
     form_metadata = {
@@ -17,7 +16,7 @@ window.onload = function () {
         formio_config.form_name,
       form_confirmation:
         formio_config.form_confirmation || config.defaultRedirect,
-      submitBtn: config.submitBtn || $("div#formio button.btn-primary"),
+      submitBtn: "button[name='data[submit]']",
     }, //Use widget values or fallback
     formName, //GTM values
     formModified; //GTM values
@@ -80,7 +79,8 @@ window.onload = function () {
 
     //Must use 'applicationSubmit' custom event on primary submit
     wizard.on("applicationSubmit", function (data) {
-      $(config.submitBtn).attr("disabled", true).addClass("sr-only");
+      console.log("event fired");
+      $(form_metadata.submitBtn).attr("disabled", true);
       wizard
         .submit()
         .then(function () {

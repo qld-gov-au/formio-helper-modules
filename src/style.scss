@@ -3,6 +3,7 @@
     //Style variables ------------------------------------------------
     $fontFace: inherit;
     $defaultRem: 1rem !important;
+
     $labelHeadingColour: #000;
     $labelHeadingSize: 20px;
     $labelHeadingWeight: 900;
@@ -89,6 +90,8 @@
         span {
           font-weight: $checkboxWeight;
           margin-left: $defaultRem;
+          margin-right: 0.5rem !important;
+          float: right;
         }
         input.form-check-input {
           width: 25px;
@@ -97,7 +100,14 @@
           margin-top: $none;
           border-radius: $borderRadius;
           border-width: $borderWidth;
+          float: left;
         }
+      }
+      .field-required:after {
+        position: absolute;
+        float: right;
+        top: 0;
+        right: 0;
       }
     }
     .form-group {
@@ -169,8 +179,25 @@
 
     //Layout modifications -------------------------------------------------
     //Align individual field descriptions before input element
-    .formio-component {
+
+    .formio-component-textfield,
+    .formio-component-textarea,
+    .formio-component-hidden,
+    .formio-component-checkbox,
+    .formio-component-email,
+    .formio-component-password,
+    .formio-component-radio,
+    .formio-component-currency,
+    .formio-component-number,
+    .formio-component-selectboxes,
+    .formio-component-url,
+    .formio-component-phoneNumber,
+    .formio-component-datetime,
+    .formio-component-day,
+    .formio-component-datetime,
+    .formio-component-currency {
       display: inline-grid;
+      //Fallback
       display: grid;
       div.col-form-label {
         order: 0;
@@ -186,7 +213,8 @@
       div[ref="element"],
       div.row,
       div.form-radio,
-      div.checkbox {
+      div.checkbox,
+      div.address-autocomplete-container {
         order: 3;
       }
     }
@@ -205,7 +233,7 @@
       //nested fieldsets
       .fieldset-body {
         label {
-          font-weight: $hintWeight;
+          font-weight: $labelWeight;
         }
       }
     }
