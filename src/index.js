@@ -5,21 +5,25 @@ window.onload = function () {
   var config = {
       baseUrl: "https://api.forms.platforms.qld.gov.au",
       body_container: $("body"),
-      formio_container: $("#formio"),
+      formio_container: "#formio",
       defaultRedirect: "contact-us/response/",
       defaultIcons: "fontawesome",
+      submitBtn: $("button[name='data[submit]']"),
     }, //Matrix widget values or default:
     form_metadata = {
+      form_name: "",
       project_name: formio_config.project_name,
-      form_name:
-        formio_config.form_name + "/v/" + formio_config.form_revision ||
-        formio_config.form_name,
       form_confirmation:
         formio_config.form_confirmation || config.defaultRedirect,
-      submitBtn: "button[name='data[submit]']",
     }, //Use widget values or fallback
     formName, //GTM values
     formModified; //GTM values
+
+  //Check if value is truthly/exists and is numeric
+  formio_config.form_revision && $.isNumeric(formio_config.form_revision)
+    ? (form_metadata.form_name =
+        formio_config.form_name + "/v/" + formio_config.form_revision)
+    : (form_metadata.form_name = formio_config.form_name);
 
   //Init form
   Formio.icons = config.defaultIcons;
@@ -51,12 +55,16 @@ window.onload = function () {
     formModified = form._form.modified;
 
     //Force new tab on formlinks
-    config.body_container.on("click", "#formio a", function (e) {
-      e.target.target = "_blank";
-    });
+    config.body_container.on(
+      "click",
+      config.formio_container + " a",
+      function (e) {
+        e.target.target = "_blank";
+      }
+    );
 
     //Change event/GTM
-    wizard.on("click", function (wizard, change) {
+    wizard.on("click", function (change) {
       var changeObj = change;
       if (
         typeof changeObj.changed != "undefined" &&
@@ -79,8 +87,7 @@ window.onload = function () {
 
     //Must use 'applicationSubmit' custom event on primary submit
     wizard.on("applicationSubmit", function (data) {
-      console.log("event fired");
-      $(form_metadata.submitBtn).attr("disabled", true);
+      config.submitBtn.attr("disabled", true);
       wizard
         .submit()
         .then(function () {
