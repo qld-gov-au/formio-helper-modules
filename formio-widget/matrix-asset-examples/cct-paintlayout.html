@@ -1,0 +1,37 @@
+<!-- No JS -->
+<noscript>
+    <div class="status warn">
+        <h2>Javascript is disabled in your browser</h2>
+        <p>To use this contact form, you must have Javascript enabled in your browser. Please <a
+                href="https://www.enable-javascript.com/" target="_blank">enable JavaScript</a> and try again.</p>
+        <p>Alternatively, you can use another contact option.</p>
+    </div>
+    <style>
+        .formio_container {
+            display: none !important;
+        }
+    </style>
+</noscript>
+
+<!-- Not supported-->
+<div class="alert alert-danger d-none" id="browser-warning" role="alert">
+    <p>Your browser is not suppported. Some functionality might not work as expected.</p>
+    <p>Please upgrade your browser to a version on the
+        <a href="https://www.forgov.qld.gov.au/browser-support-lists">supported browser list</a>
+    </p>
+</div>
+
+<!-- Form/Loader-->
+<div id="formio" class="formio_container">
+    <img src="?a=126703" />
+</div>
+
+<!-- Object for footer loader-->
+<script type="text/javascript">
+    var formio_config = {
+        project_name: "%asset_metadata_project-name%",
+        form_name: "%asset_metadata_form-name%",
+        form_confirmation: "%asset_metadata_form-confirmation%" % begin_asset_metadata_form - revision %,
+        form_revision: "%asset_metadata_form-revision%" % end_asset_metadata_form - revision %
+    };
+</script>
