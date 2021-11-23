@@ -29,9 +29,10 @@
 <!-- Object for footer loader-->
 <script type="text/javascript">
     var formio_config = {
-        project_name: "%asset_metadata_project-name%",
-        form_name: "%asset_metadata_form-name%",
-        form_confirmation: "%asset_metadata_form-confirmation%" % begin_asset_metadata_form - revision %,
-        form_revision: "%asset_metadata_form-revision%" % end_asset_metadata_form - revision %
+        project_name: "%asset_metadata_project-name%", 
+        form_name: "%asset_metadata_form-name%", 
+        form_confirmation: "%asset_metadata_form-confirmation%"%begin_asset_metadata_form-revision%,
+        form_revision: "%asset_metadata_form-revision%"%end_asset_metadata_form-revision%,
+        env_url: "%begin_asset_metadata_env-url^eq:test% qol-formio-t-api.azurefd.net %else_asset% api.forms.platforms.qld.gov.au %end_asset%"
     };
 </script>

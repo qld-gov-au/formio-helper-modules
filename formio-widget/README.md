@@ -26,6 +26,7 @@
 - Form name (name of form under project mentioned above)
 - Revision number (used to pull exact version otherwise fallback to latest)
 - Confirmation page (relative URL behind qld.gov.au, e.g. qld.gov.au/contactus/response would be 'contactus/response' as value)
+- Form.io environment URL (used to set the Form.io environment i.e, Production or Test)
 
 #### Paint layout (interface between script/user values)
 
@@ -98,10 +99,11 @@
 <!-- Object for footer loader-->
 <script type="text/javascript">
   var formio_config = {
-      project_name: "%asset_metadata_project-name%",
-      form_name: "%asset_metadata_form-name%",
-      form_confirmation: "%asset_metadata_form-confirmation%"%begin_asset_metadata_form-revision%,
-      form_revision: "%asset_metadata_form-revision%"%end_asset_metadata_form-revision%
+        project_name: "%asset_metadata_project-name%", 
+        form_name: "%asset_metadata_form-name%", 
+        form_confirmation: "%asset_metadata_form-confirmation%"%begin_asset_metadata_form-revision%,
+        form_revision: "%asset_metadata_form-revision%"%end_asset_metadata_form-revision%,
+        env_url: "%begin_asset_metadata_env-url^eq:test% qol-formio-t-api.azurefd.net %else_asset% api.forms.platforms.qld.gov.au %end_asset%"
   };
 </script>
 ```
