@@ -3,7 +3,7 @@ window.onload = function () {
 
   //Widget config (should not change):
   var config = {
-      baseUrl: "https://api.forms.platforms.qld.gov.au",
+      baseUrl: "https://" + formio_config.env_url.trim(),
       body_container: $("body"),
       formio_container: "#formio",
       defaultRedirect: "contact-us/response/",
