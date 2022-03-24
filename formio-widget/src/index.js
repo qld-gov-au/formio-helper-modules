@@ -18,7 +18,6 @@ window.onload = function () {
             const formioInstance = formioInstances.find((item)=>item.formio.formUrl===requestArgs.formio.formUrl);
             requestArgs.formio = formioInstance.formio;
             requestArgs.opts.formio = formioInstance.formio;
-            console.log("test777", requestArgs)
         }
         if (requestArgs.formio.options) requestArgs.opts.namespace = requestArgs.formio.options.namespace
       return Promise.resolve(null);
@@ -27,8 +26,8 @@ window.onload = function () {
   Formio.registerPlugin(NamespacePolyfillPlugin, 'namespacepolyfill');
 
   if (formioInstances && formioInstances.length) {
+    // loop through all formioInstances and render the form for each instance
       formioInstances.forEach(function(formioInstance) {
-          console.log("test111", formioInstance);
           /*
           * setup config
           */
@@ -60,7 +59,6 @@ window.onload = function () {
                   namespace: namespace,
               }
           );
-          console.log("Test333", formio);
           formioInstance.formio = formio;
           
           
@@ -89,7 +87,6 @@ window.onload = function () {
           ).then(function (wizard) {
               wizard.formio = formio;
               wizard.options.formio = formio;
-              console.log("test555", wizard);
               
               const formName = wizard._form.title;
               const formModified = wizard._form.modified;
@@ -106,7 +103,6 @@ window.onload = function () {
               //Change event/GTM
               wizard.on("click", function (change) {
                   var changeObj = change;
-                  console.log("test777", changeObj)
                   if (
                   typeof changeObj.changed != "undefined" &&
                   typeof changeObj.changed.component != "undefined"
